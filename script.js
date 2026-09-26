@@ -13,12 +13,14 @@ MENU.forEach((c) => c.items.forEach((it) => { it.cat = c.id; byId[it.id] = it; }
 const plural = (n) => { const m10 = n % 10, m100 = n % 100; return n + (m10 === 1 && m100 !== 11 ? " блюдо" : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? " блюда" : " блюд"); };
 function renderMenu() {
   $("#catLane").innerHTML = MENU.map((c) => `<button class="cat" type="button" data-cat="${c.id}">${c.name}</button>`).join("");
-  $("#menuBody").innerHTML = MENU.map((c) => {
+  $("#menuBody").innerHTML = MENU.map((c, k) => {
     const ph = c.items.filter((i) => i.i), rows = c.items.filter((i) => !i.i);
-    return `<section class="mcat" id="${c.id}" aria-label="${c.name}">
+    const pv = MENU[k - 1], nx = MENU[k + 1];
+    return `<section class="mcat" id="${c.id}" aria-label="${c.name}"${k ? " hidden" : ""}>
       <h3>${c.name} <small>${plural(c.items.length)}</small></h3>
       ${ph.length ? `<div class="grid">${ph.map(dishHTML).join("")}</div>` : ""}
       ${rows.length ? `<div class="mrows">${rows.map(rowHTML).join("")}</div>` : ""}
+      <div class="mcat-nav">${pv ? `<button type="button" data-cat-go="${pv.id}"><svg width="16" height="16" style="transform:scaleX(-1)"><use href="#ic-ar"/></svg><span>${pv.name}</span></button>` : ""}${nx ? `<button type="button" class="nx" data-cat-go="${nx.id}"><span>${nx.name}</span><svg width="16" height="16"><use href="#ic-ar"/></svg></button>` : ""}</div>
     </section>`;
   }).join("");
 }
@@ -156,6 +158,18 @@ $$("[data-prev],[data-next]").forEach((b) => b.addEventListener("click", () => {
   lane.scrollBy({ left: (b.dataset.prev ? -1 : 1) * laneStep(lane) * (lane.id === "catLane" ? 3 : 1), behavior: "smooth" });
 }));
 
+/* ---------- вкладки меню ---------- */
+let curCat = "";
+function showCat(id) {
+  if (!MENU.some((c) => c.id === id)) return;
+  curCat = id;
+  $$(".mcat").forEach((sec) => { sec.hidden = sec.id !== id; });
+  $$(".cat").forEach((b) => b.classList.toggle("on", b.dataset.cat === id));
+  const on = $(".cat.on"), lane = $("#catLane");
+  if (on) lane.scrollTo({ left: on.offsetLeft - lane.offsetLeft - 40, behavior: "smooth" });
+  $$(`#${id} .rv`).forEach((el) => el.classList.add("in"));
+}
+
 /* ---------- переходы по якорям ---------- */
 const hdrH = () => $("#hdr").offsetHeight;
 function naturalTop(el) {
@@ -165,13 +179,14 @@ function naturalTop(el) {
 }
 function targetTop(el) {
   if (el.classList.contains("plate") && getComputedStyle(el).position === "sticky") return naturalTop(el);
-  let off = hdrH() + 8;
+  let off = hdrH() + 24;
   if (el.classList.contains("mcat")) off = hdrH() + $("#cats").offsetHeight + 4;
   if (el.id === "top" || el.id === "hero") return 0;
   return naturalTop(el) - off;
 }
 function go(id, smooth) {
   const el = document.getElementById(id); if (!el) return;
+  if (el.classList.contains("mcat")) showCat(id);
   window.scrollTo({ top: Math.max(0, targetTop(el)), behavior: smooth ? "smooth" : "auto" });
 }
 document.addEventListener("click", (e) => {
@@ -180,10 +195,17 @@ document.addEventListener("click", (e) => {
   e.preventDefault(); closeMenu(); go(id, true);
   history.replaceState(null, "", id === "top" ? location.pathname + location.search : "#" + id);
 });
-$("#catLane").addEventListener("click", (e) => { const b = e.target.closest("[data-cat]"); if (b) { go(b.dataset.cat, true); history.replaceState(null, "", "#" + b.dataset.cat); } });
+function pickCat(id) {
+  showCat(id);
+  const top = targetTop(document.getElementById(id));
+  if (scrollY > top + 4) window.scrollTo({ top, behavior: "auto" });
+  history.replaceState(null, "", "#" + id);
+}
+$("#catLane").addEventListener("click", (e) => { const b = e.target.closest("[data-cat]"); if (b) pickCat(b.dataset.cat); });
+$("#menuBody").addEventListener("click", (e) => { const b = e.target.closest("[data-cat-go]"); if (b) { showCat(b.dataset.catGo); window.scrollTo({ top: targetTop(document.getElementById(b.dataset.catGo)), behavior: "smooth" }); history.replaceState(null, "", "#" + b.dataset.catGo); } });
 
 /* ---------- плиты, подсветка категорий, панель ---------- */
-let plates = [], ticking = false, spyCat = "";
+let plates = [], ticking = false;
 function frame() {
   ticking = false;
   const vh = innerHeight, y = scrollY;
@@ -194,15 +216,6 @@ function frame() {
     p.style.setProperty("--enter", enter.toFixed(3));
     p.style.setProperty("--exit", exit.toFixed(3));
   });
-  const line = hdrH() + $("#cats").offsetHeight + 40;
-  let cur = "";
-  $$(".mcat").forEach((s) => { if (s.getBoundingClientRect().top <= line) cur = s.id; });
-  if (cur !== spyCat) {
-    spyCat = cur;
-    $$(".cat").forEach((b) => b.classList.toggle("on", b.dataset.cat === cur));
-    const on = $(".cat.on"), lane = $("#catLane");
-    if (on) lane.scrollTo({ left: on.offsetLeft - lane.offsetLeft - 40, behavior: "smooth" });
-  }
   const c = $("#contacts").getBoundingClientRect().top;
   $("#mbar").classList.toggle("on", y > vh * 0.55 && c > vh * 0.5);
 }
@@ -210,6 +223,7 @@ const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(f
 
 /* ---------- старт ---------- */
 renderMenu();
+showCat(MENU[0].id);
 setMode("delivery");
 syncCart();
 plates = $$(".plate");
