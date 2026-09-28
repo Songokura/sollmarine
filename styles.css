@@ -429,3 +429,126 @@ main>*{position:relative}
 .mcat-nav button:hover{border-color:var(--ink)}
 .mcat-nav .nx{margin-left:auto;background:var(--ink);color:#fff;border-color:var(--ink)}
 @media (max-width:560px){.mcat-nav button{flex:1;justify-content:center;padding:0 10px;font-size:14px}.mcat-nav button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+
+/* ===== 28.09.2026: герой с блюдом, акции месяца, языки, нижние кнопки ===== */
+.hero{background:var(--ink)}
+.hero .pl-media{left:auto;width:54%}
+.hero .pl-media img{object-position:50% 58%}
+.hero .pl-shade{background:linear-gradient(90deg,var(--ink) 0%,rgba(15,30,43,.92) 40%,rgba(15,30,43,.35) 58%,rgba(15,30,43,0) 72%),linear-gradient(0deg,rgba(8,20,30,.55),rgba(8,20,30,0) 40%)}
+.hero-in>.h1,.hero-in>.lead{max-width:none}
+.hero .h1,.hero .lead{width:60%}
+.hero-deal{display:inline-flex;align-items:center;flex-wrap:wrap;gap:6px 12px;margin-top:22px;padding:10px 16px 10px 10px;border-radius:14px;background:rgba(243,199,155,.12);border:1px solid rgba(243,199,155,.4);color:#fff;font-weight:600;font-size:15px;transition:background .2s}
+.hero-deal b{background:#F3C79B;color:var(--ink);font:800 11px/1 var(--fb);letter-spacing:.12em;text-transform:uppercase;padding:7px 9px;border-radius:8px}
+.hero-deal svg{color:#F3C79B}
+.hero-deal:hover{background:rgba(243,199,155,.2)}
+.ready .hero-in>:nth-child(5){transition-delay:.48s}
+.ready .hero-in>:nth-child(6){transition-delay:.56s}
+
+/* акции месяца */
+.deals{margin-top:clamp(40px,5vw,72px);padding:clamp(48px,6vw,88px) 0 clamp(40px,5vw,72px);background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.deals::before{content:"";position:absolute;right:-12%;top:-30%;width:60%;height:120%;background:radial-gradient(closest-side,rgba(184,50,42,.35),rgba(184,50,42,0));pointer-events:none}
+.deals .h2{color:#fff}.deals .h2 em{color:#F3C79B}
+.deals .sub{color:rgba(255,255,255,.75)}
+.deals-head{align-items:flex-end;position:relative}
+.arr-d{background:transparent;border-color:rgba(255,255,255,.3);color:#fff}
+.arr-d:hover:not(:disabled){background:#fff;color:var(--ink);border-color:#fff}
+.deal-lane{position:relative;gap:18px;padding-top:6px;padding-bottom:6px;padding-left:max(var(--pad),calc((100vw - 1280px)/2 + var(--pad)));padding-right:var(--pad);scroll-padding-left:max(var(--pad),calc((100vw - 1280px)/2 + var(--pad)))}
+.deal-hit{flex:0 0 clamp(290px,30vw,400px);scroll-snap-align:start;border-radius:24px;padding:28px;background:linear-gradient(160deg,#B8322A,#7E1F19);display:flex;flex-direction:column;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.deal-tag{margin:0 0 18px;align-self:flex-start;font:800 11px/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:8px 10px;border-radius:8px}
+.deal-hit h3{font-size:clamp(32px,3vw,44px);line-height:1.05;color:#fff}
+.deal-hit h3 em{color:#FFE0BF;display:block;font-size:1.25em;margin:4px 0}
+.deal-hit ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:8px;font-size:15px;color:rgba(255,255,255,.92)}
+.deal-hit li{display:flex;gap:10px;align-items:baseline}
+.deal-hit li::before{content:"";flex:0 0 7px;height:7px;border-radius:50%;background:#FFE0BF;transform:translateY(-1px)}
+.deal-btns{display:grid;gap:10px;margin-top:auto;padding-top:24px}
+.deal-btns .btn{width:100%}
+.story{position:relative;flex:0 0 clamp(220px,20vw,280px);aspect-ratio:9/16;border-radius:22px;overflow:hidden;scroll-snap-align:start;background:#16293A;text-align:left;box-shadow:0 24px 50px -28px rgba(0,0,0,.7);transition:transform .35s}
+.story:hover{transform:translateY(-4px)}
+.story img,.story video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.story video{opacity:0;transition:opacity .4s}
+.story video.is-live{opacity:1}
+.story::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(0deg,rgba(8,20,30,.85),rgba(8,20,30,0));pointer-events:none}
+.story::before{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1.5px rgba(243,199,155,.35);z-index:2;pointer-events:none}
+.story-l{position:absolute;left:16px;right:16px;bottom:14px;z-index:3;color:#fff;font-weight:700;font-size:15px;line-height:1.25}
+.story-play{position:absolute;left:50%;top:50%;z-index:3;width:62px;height:62px;margin:-31px 0 0 -31px;border-radius:50%;background:rgba(255,255,255,.92);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.story-play::after{content:"";position:absolute;left:25px;top:20px;border-left:17px solid var(--accent);border-top:11px solid transparent;border-bottom:11px solid transparent}
+.perks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:28px;position:relative}
+.perk{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;padding:20px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+.perk svg{grid-row:1/3;color:#F3C79B}
+.perk b{font:600 20px/1.2 var(--fd)}
+.perk b i{font-style:normal;color:#F3C79B}
+.perk span{font-size:14px;color:rgba(255,255,255,.72)}
+
+/* просмотр постера / видео */
+.viewer{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:16px}
+.viewer-bg{position:absolute;inset:0;background:rgba(7,18,27,.86)}
+.viewer-box{position:relative;animation:pop .25s ease}
+.viewer-box img,.viewer-box video{display:block;height:min(86svh,960px);width:auto;max-width:calc(100vw - 32px);aspect-ratio:9/16;object-fit:contain;border-radius:18px;background:#000}
+.viewer-box img[hidden],.viewer-box video[hidden]{display:none}
+.viewer .x{position:absolute;top:10px;right:10px;z-index:2}
+
+/* отзывы: площадки */
+.rev-more{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.rev-more .btn{height:48px;padding:0 20px;font-size:15px}
+.rev-more .btn svg{color:#E3A008}
+
+/* нижний ряд основных кнопок */
+.end-cta{margin-top:clamp(40px,5vw,64px);display:flex;align-items:center;justify-content:space-between;gap:20px 32px;flex-wrap:wrap;padding-top:clamp(28px,4vw,40px);border-top:1px solid rgba(255,255,255,.12)}
+.end-t{margin:0;font:600 clamp(26px,3vw,38px)/1.1 var(--fd);color:#fff}
+.end-t em{color:#F3C79B}
+.end-btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn-light{background:#fff;color:var(--ink)}
+.btn-light:hover{background:#F3E6D6}
+
+/* переключатель языка */
+.lang{display:flex;padding:3px;border-radius:10px;background:#EFE8DE;border:1px solid var(--line)}
+.lang button{height:32px;min-width:36px;padding:0 8px;border-radius:7px;font:800 12px/1 var(--fb);letter-spacing:.06em;color:var(--mute);transition:background .2s,color .2s}
+.lang button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(15,30,43,.15)}
+
+@media (max-width:1000px){
+  .perks{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .hero{align-items:flex-end}
+  .hero .pl-media{width:100%;height:60%;bottom:auto}
+  .hero .pl-media img{object-position:50% 50%}
+  .hero .pl-shade{background:linear-gradient(0deg,var(--ink) 0%,var(--ink) 40%,rgba(15,30,43,.6) 52%,rgba(15,30,43,0) 66%),linear-gradient(180deg,rgba(15,30,43,.35),rgba(15,30,43,0) 20%)}
+  .hero .h1,.hero .lead{width:auto}
+  .hero .lead{margin-top:14px;font-size:16px}
+  .hero-deal{margin-top:16px;font-size:14px}
+  .hero-btns{margin-top:18px}
+  .hero-ig{margin-top:14px}
+  .deal-hit{flex-basis:82%}
+  .story{flex-basis:62%}
+  .end-btns{width:100%;display:grid;grid-template-columns:1fr 1fr}
+  .end-btns .btn:first-child{grid-column:1/-1}
+  .rev-more .btn{flex:1 1 100%}
+  .lang button{min-width:30px;padding:0 6px;height:30px;font-size:11px}
+}
+@media (max-width:760px){
+  .hero .kicker{font-size:11px;letter-spacing:.1em;margin-bottom:10px}
+  .hero .h1{font-size:clamp(34px,10vw,50px)}
+  .hero .lead{font-size:15px;line-height:1.45}
+  .hero-deal{display:flex;flex-wrap:nowrap;align-items:center;gap:10px;padding:8px 12px 8px 8px;font-size:13px;line-height:1.3}
+  .hero-deal b{flex:0 0 auto;font-size:10px;padding:6px 7px}
+  .hero-deal svg{display:none}
+  .hero-btns{gap:10px}
+  .hero-btns .btn{height:50px}
+}
+@media (max-width:480px){
+  .hdr-tel{display:none}
+  .hdr-in{gap:8px}
+}
+@media (max-width:760px){
+  .deals-head{flex-wrap:wrap}
+  .deals-head .arrows{margin-left:auto}
+}
+.rev-note{margin:14px auto 0;font-size:14px;color:var(--mute)}
+@media (max-width:1499px){
+  .hdr-tel span{display:none}
+  .hdr-tel{width:44px;height:44px;border-radius:12px;border:1.5px solid var(--line);justify-content:center}
+}
+@media (max-width:1240px){
+  .nav{display:none}
+  .burger{display:block}
+}
