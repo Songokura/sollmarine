@@ -252,6 +252,23 @@ const loopIO = "IntersectionObserver" in window ? new IntersectionObserver((es) 
 }), { threshold: 0.55 }) : null;
 $$("video[data-loop]").forEach((v) => { v.addEventListener("playing", () => v.classList.add("is-live")); if (loopIO) loopIO.observe(v); });
 
+/* ---------- окно акций: через 20 с после входа, один раз за визит ---------- */
+const pop = $("#promoPop"), popLane = $("#popLane");
+function popSeen(set) { try { if (set) sessionStorage.setItem("promoPop", "1"); return sessionStorage.getItem("promoPop") === "1"; } catch (e) { return false; } }
+function closePop() { pop.hidden = true; lock(false); }
+function openPop() {
+  const busy = !viewer.hidden || !$("#bookModal").hidden || !drawer.hidden || document.body.classList.contains("menu-open");
+  if (busy) { setTimeout(openPop, 5000); return; }
+  const items = $$("#dealLane [data-story]");
+  if (!items.length || popSeen()) return;
+  popLane.innerHTML = items.map((b) => `<figure><img src="${b.dataset.story}" alt="${b.querySelector("img").alt.replace(/"/g, "&quot;")}"></figure>`).join("");
+  pop.hidden = false; lock(true); popSeen(true);
+  popLane.scrollLeft = 0; requestAnimationFrame(() => laneSync(popLane));
+}
+if (pop && !popSeen()) setTimeout(openPop, 20000);
+pop.addEventListener("click", (e) => { if (e.target.closest("[data-pop-close],[data-book],a")) closePop(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !pop.hidden) closePop(); });
+
 /* ---------- языки: RU в разметке, KZ и EN - файлами assets/lang по выбору ---------- */
 const SKIP = "script,style,svg,blockquote,#menuBody,#catLane,#cartList,[data-i18n]";
 const txtNodes = [], attrEls = [], htmlEls = $$("[data-i18n]").map((el) => [el, el.innerHTML]);

@@ -566,10 +566,22 @@ main>*{position:relative}
 .hero-brand{font-size:clamp(22px,2.1vw,30px);margin-bottom:16px}
 @media (min-width:761px){.hero .pl-media img{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 34%);mask-image:linear-gradient(90deg,transparent 0,#000 34%)}}
 @media (max-width:760px){.hero-brand{font-size:19px;margin-bottom:8px}}
-/* VIP-комната: постеры клиента на карточке, открываются в просмотрщике */
-.vip-posters{position:absolute;top:16px;right:16px;z-index:2;display:flex;gap:10px}
-.vip-posters button{width:84px;aspect-ratio:9/16;padding:0;border:2px solid rgba(255,255,255,.85);border-radius:12px;overflow:hidden;background:var(--ink);box-shadow:0 14px 30px -12px rgba(0,0,0,.6);transition:transform .3s}
-.vip-posters button:hover{transform:translateY(-3px)}
-.vip-posters img{position:static;display:block;width:100%;height:100%;object-fit:cover}
+/* VIP-комната: кнопка брони */
 .vip-btn{align-self:flex-start;margin-top:12px}
-@media (max-width:760px){.vip-posters button{width:60px}.amen-wide{min-height:380px}}
+@media (max-width:760px){.amen-wide{min-height:380px}}
+/* окно акций: всплывает через 20 с, постеры берутся из ленты #dealLane */
+.promo-pop{z-index:85}
+.promo-pop .modal-bg{background:rgba(7,18,27,.8)}
+.pop-in{position:relative;width:min(980px,100%);max-height:calc(100svh - 32px);overflow:auto;background:linear-gradient(160deg,#13283A,#0B1A26);color:#fff;border-radius:26px;padding:26px 0 22px;animation:pop .3s ease;box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+.pop-in .x{position:absolute;top:16px;right:16px;z-index:3;color:var(--ink)}
+.pop-hd{padding:0 70px 0 26px}
+.pop-hd .kicker{margin:0 0 8px}
+.pop-hd h3{font-size:clamp(26px,3vw,36px);color:#fff}
+.pop-lane-wrap{position:relative;margin-top:18px}
+.pop-lane{gap:14px;padding:0 26px;scroll-padding-left:26px}
+.pop-lane figure{flex:0 0 auto;height:min(56svh,520px);aspect-ratio:9/16;margin:0;border-radius:18px;overflow:hidden;scroll-snap-align:start;background:#16293A}
+.pop-lane img{display:block;width:100%;height:100%;object-fit:cover}
+.pop-prev,.pop-next{position:absolute;top:50%;transform:translateY(-50%);z-index:2;background:rgba(11,26,38,.75)}
+.pop-prev{left:10px}.pop-next{right:10px}
+.pop-btns{display:flex;flex-wrap:wrap;gap:10px;padding:20px 26px 0}
+@media (max-width:760px){.pop-in{padding:20px 0 16px}.pop-hd{padding:0 64px 0 18px}.pop-lane{padding:0 18px;scroll-padding-left:18px}.pop-lane figure{height:min(52svh,440px)}.pop-btns{padding:16px 18px 0}.pop-btns .btn{flex:1 1 100%}}

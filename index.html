@@ -21,7 +21,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/hero-fish.webp" media="(min-width: 761px)">
 <link rel="preload" as="image" href="assets/img/hero-fish-m.webp" media="(max-width: 760px)">
-<link rel="stylesheet" href="styles.css?v=20260929-6">
+<link rel="stylesheet" href="styles.css?v=20260929-7">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Restaurant","name":"Sollmarine","description":"Ресторан морской кухни и стейк-хаус","servesCuisine":["Рыба и морепродукты","Стейки","Европейская кухня"],"address":{"@type":"PostalAddress","streetAddress":"5А микрорайон, 4, ЖК Twin Towers","addressLocality":"Актау","addressCountry":"KZ"},"geo":{"@type":"GeoCoordinates","latitude":43.639817,"longitude":51.154989},"sameAs":["https://www.instagram.com/sollmarine_aktau/","https://2gis.kz/aktau/geo/70000001101402112"],"telephone":"+77081806825","openingHours":"Mo-Su 12:00-24:00","paymentAccepted":"Cash, Credit Card, QR","url":"https://sollmarine.kz/","image":"https://sollmarine.kz/assets/og-image.jpg","acceptsReservations":"True","hasMenu":"https://sollmarine.kz/#menu"}
 </script>
@@ -145,6 +145,8 @@
         <button class="story" type="button" data-story="assets/promo/kefal-light.webp"><img src="assets/promo/kefal-light-s.webp" alt="Постер: акция на кефаль продолжается, 3 600 ₸ за 1 кг, с 12:00 до 18:00 ежедневно" loading="lazy"><span class="story-l">Кефаль 3 600 ₸ за 1 кг</span></button>
         <button class="story story-v" type="button" data-video="assets/promo/kids.mp4"><img src="assets/promo/kids-poster.webp" alt="Дети играют в сухом бассейне с шариками в детской зоне Sollmarine" loading="lazy"><video muted playsinline loop preload="none" data-loop="assets/promo/kids-loop.mp4"></video><span class="story-play" aria-hidden="true"></span><span class="story-l">Детская площадка</span></button>
         <button class="story" type="button" data-story="assets/promo/kids.webp"><img src="assets/promo/kids-s.webp" alt="Постер: ждём вас вместе с детьми, детская площадка и аквагрим" loading="lazy"><span class="story-l">Аквагрим и детское меню</span></button>
+        <button class="story" type="button" data-story="assets/promo/vip-1.webp"><img src="assets/promo/vip-1-s.webp" alt="Постер: VIP-зона для ваших мероприятий" loading="lazy"><span class="story-l">VIP-зона для праздников</span></button>
+        <button class="story" type="button" data-story="assets/promo/vip-2.webp"><img src="assets/promo/vip-2-s.webp" alt="Постер: в Sollmarine есть VIP-зона для праздников и встреч" loading="lazy"><span class="story-l">VIP-зона с видом на море</span></button>
       </div>
       <div class="wrap perks">
         <div class="perk"><svg width="30" height="30"><use href="#ic-fish"/></svg><b>Рыба по себестоимости</b><span>Каждый месяц: сазан, кефаль, судак или осетрина с Каспия</span></div>
@@ -260,10 +262,6 @@
       <div class="amen-grid">
         <article class="amen-card amen-wide has-img">
           <img src="assets/img/vip-room.webp" alt="VIP-комната с деревянными арками и сервированным столом" loading="lazy">
-          <div class="vip-posters">
-            <button type="button" data-story="assets/promo/vip-1.webp"><img src="assets/promo/vip-1-s.webp" alt="Постер: VIP-зона для ваших мероприятий" loading="lazy"></button>
-            <button type="button" data-story="assets/promo/vip-2.webp"><img src="assets/promo/vip-2-s.webp" alt="Постер: в Sollmarine есть VIP-зона для праздников и встреч" loading="lazy"></button>
-          </div>
           <div class="amen-tx"><b>VIP-комната</b><span>Дни рождения, юбилеи, встречи и корпоративы - уютно и без посторонних</span><a class="btn btn-wa vip-btn" href="https://wa.me/77081806825?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20VIP-%D0%B7%D0%BE%D0%BD%D1%83%20%D0%B2%20Sollmarine." target="_blank" rel="noopener"><svg width="18" height="18"><use href="#ic-wa"/></svg><span>Забронировать VIP</span></a></div>
         </article>
         <article class="amen-card has-img">
@@ -430,6 +428,26 @@
   </div>
 </div>
 
+<div class="modal promo-pop" id="promoPop" hidden>
+  <div class="modal-bg" data-pop-close></div>
+  <div class="pop-in" role="dialog" aria-modal="true" aria-labelledby="popTitle">
+    <button class="x" type="button" data-pop-close aria-label="Закрыть"><svg width="22" height="22"><use href="#ic-x"/></svg></button>
+    <div class="pop-hd">
+      <p class="kicker kicker-light">--- Акции месяца</p>
+      <h3 id="popTitle">Успейте в сентябре</h3>
+    </div>
+    <div class="pop-lane-wrap">
+      <div class="lane pop-lane" id="popLane" tabindex="0"></div>
+      <button class="arr arr-d pop-prev" type="button" data-prev="popLane" aria-label="Назад"><svg width="18" height="18" style="transform:scaleX(-1)"><use href="#ic-chev"/></svg></button>
+      <button class="arr arr-d pop-next" type="button" data-next="popLane" aria-label="Вперёд"><svg width="18" height="18"><use href="#ic-chev"/></svg></button>
+    </div>
+    <div class="pop-btns">
+      <a class="btn btn-wa" href="https://wa.me/77081806825?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%20%D0%B0%D0%BA%D1%86%D0%B8%D0%B8%20%D0%BC%D0%B5%D1%81%D1%8F%D1%86%D0%B0." target="_blank" rel="noopener"><svg width="18" height="18"><use href="#ic-wa"/></svg><span>Заказать по акции</span></a>
+      <button class="btn btn-ghost-l" type="button" data-book>Забронировать стол</button>
+    </div>
+  </div>
+</div>
+
 <div class="viewer" id="viewer" hidden>
   <div class="viewer-bg" data-viewer-close></div>
   <div class="viewer-box">
@@ -441,6 +459,6 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="script.js?v=20260929-6"></script>
+<script src="script.js?v=20260929-7"></script>
 </body>
 </html>
