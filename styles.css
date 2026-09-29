@@ -566,3 +566,10 @@ main>*{position:relative}
 .hero-brand{font-size:clamp(22px,2.1vw,30px);margin-bottom:16px}
 @media (min-width:761px){.hero .pl-media img{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 34%);mask-image:linear-gradient(90deg,transparent 0,#000 34%)}}
 @media (max-width:760px){.hero-brand{font-size:19px;margin-bottom:8px}}
+/* VIP-комната: постеры клиента на карточке, открываются в просмотрщике */
+.vip-posters{position:absolute;top:16px;right:16px;z-index:2;display:flex;gap:10px}
+.vip-posters button{width:84px;aspect-ratio:9/16;padding:0;border:2px solid rgba(255,255,255,.85);border-radius:12px;overflow:hidden;background:var(--ink);box-shadow:0 14px 30px -12px rgba(0,0,0,.6);transition:transform .3s}
+.vip-posters button:hover{transform:translateY(-3px)}
+.vip-posters img{position:static;display:block;width:100%;height:100%;object-fit:cover}
+.vip-btn{align-self:flex-start;margin-top:12px}
+@media (max-width:760px){.vip-posters button{width:60px}.amen-wide{min-height:380px}}
