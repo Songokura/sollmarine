@@ -452,7 +452,7 @@ main>*{position:relative}
 .deals-head{align-items:flex-end;position:relative}
 .arr-d{background:transparent;border-color:rgba(255,255,255,.3);color:#fff}
 .arr-d:hover:not(:disabled){background:#fff;color:var(--ink);border-color:#fff}
-.deal-lane{position:relative;gap:18px;padding-top:6px;padding-bottom:6px;padding-left:max(var(--pad),calc((100vw - 1280px)/2 + var(--pad)));padding-right:var(--pad);scroll-padding-left:max(var(--pad),calc((100vw - 1280px)/2 + var(--pad)))}
+.deal-lane{position:relative;gap:18px;padding-top:6px;padding-bottom:6px;padding-left:max(var(--pad),calc((100vw - 1280px)/2 + var(--pad)));padding-right:max(var(--pad),calc((100vw - 1280px)/2 + var(--pad)));scroll-padding-left:max(var(--pad),calc((100vw - 1280px)/2 + var(--pad)))}
 .deal-hit{flex:0 0 clamp(290px,30vw,400px);scroll-snap-align:start;border-radius:24px;padding:28px;background:linear-gradient(160deg,#B8322A,#7E1F19);display:flex;flex-direction:column;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
 .deal-tag{margin:0 0 18px;align-self:flex-start;font:800 11px/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:8px 10px;border-radius:8px}
 .deal-hit h3{font-size:clamp(32px,3vw,44px);line-height:1.05;color:#fff}
