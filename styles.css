@@ -585,3 +585,4 @@ main>*{position:relative}
 .pop-prev{left:10px}.pop-next{right:10px}
 .pop-btns{display:flex;flex-wrap:wrap;gap:10px;padding:20px 26px 0}
 @media (max-width:760px){.pop-in{padding:20px 0 16px}.pop-hd{padding:0 64px 0 18px}.pop-lane{padding:0 18px;scroll-padding-left:18px}.pop-lane figure{height:min(52svh,440px)}.pop-btns{padding:16px 18px 0}.pop-btns .btn{flex:1 1 100%}}
+.sec-head .svc{margin-top:8px;font-size:14px;opacity:.7}
