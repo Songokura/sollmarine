@@ -124,6 +124,7 @@ $("#orderForm").addEventListener("submit", (e) => {
   const f = e.target;
   if (f.elements.company.value) return;
   if (!check(f, mode === "delivery" ? ["name", "phone", "address"] : ["name", "phone"])) return;
+  adsConversion(ADS_FORM);
   const lines = Object.keys(cart).map((id, i) => { const it = byId[base(id)], q = cart[id]; return `${i + 1}. ${nameOf(id, true)} x${q} - ${fmt(it.p * q)}`; });
   const v = (n) => f.elements[n].value.trim();
   const msg = ["Здравствуйте! Заказ с сайта Sollmarine", "", ...lines, "",
@@ -141,6 +142,7 @@ $("#bookForm").addEventListener("submit", (e) => {
   const f = e.target;
   if (f.elements.company.value) return;
   if (!check(f, ["name", "phone", "date", "time"])) return;
+  adsConversion(ADS_FORM);
   const d = f.elements.date.value.split("-").reverse().join(".");
   const msg = ["Здравствуйте! Бронь стола с сайта Sollmarine", "Дата: " + d + ", " + f.elements.time.value, "Гостей: " + f.elements.guests.value,
     "Имя: " + f.elements.name.value.trim(), "Телефон: " + f.elements.phone.value.trim(),
@@ -340,3 +342,21 @@ if (hash && document.getElementById(hash)) {
   });
   frame();
 }
+
+/* ============ Конверсии Google Ads (AW-18486408088) ============
+   nryJCMHB04wdEJjngO9E - Интерактивные номера телефонов (клик по tel:)
+   DNegCLaOyowdEJjngO9E - Отправка формы (заказ доставки/самовывоза и бронь стола, после проверки полей)
+   GmdICJKF0YwdEJjngO9E - Контакт (клик по ссылке WhatsApp и по онлайн-брони vira)
+   Формы открывают WhatsApp через window.open - это не клик по ссылке, «Контакт» второй раз не уходит. */
+const ADS_ID = "AW-18486408088", ADS_TEL = "nryJCMHB04wdEJjngO9E", ADS_FORM = "DNegCLaOyowdEJjngO9E", ADS_CONTACT = "GmdICJKF0YwdEJjngO9E";
+function adsConversion(label) {
+  if (typeof gtag !== "function") return;
+  gtag("event", "conversion", { send_to: ADS_ID + "/" + label, value: 1.0, currency: "USD", transport_type: "beacon" });
+}
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("a[href]");
+  if (!a) return;
+  const href = a.getAttribute("href");
+  if (href.startsWith("tel:")) adsConversion(ADS_TEL);
+  else if (/wa\.me\/|vira\.cafe\/solmarine\/booking/.test(href)) adsConversion(ADS_CONTACT);
+}, true);

@@ -13,6 +13,30 @@
 <meta property="og:description" content="Осётр, рыба Каспия, стейки и сеты на компанию. Зал на 92 места и доставка по Актау.">
 <meta property="og:url" content="https://sollmarine.kz/">
 <meta property="og:image" content="https://sollmarine.kz/assets/og-image.jpg">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18486408088"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18486408088');
+
+  /* Конверсия «Интерактивные номера телефонов». Сниппет Google возвращает false и
+     уводит на url в event_callback; у нас ссылки tel: обрабатываются слушателем в
+     script.js без preventDefault - переход к звонку не должен ждать ответа Google. */
+  function gtag_report_conversion(url) {
+    var callback = function () {
+      if (typeof(url) != 'undefined') { window.location = url; }
+    };
+    gtag('event', 'conversion', {
+      'send_to': 'AW-18486408088/nryJCMHB04wdEJjngO9E',
+      'value': 1.0,
+      'currency': 'USD',
+      'event_callback': callback
+    });
+    return false;
+  }
+</script>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -21,7 +45,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/hero-fish.webp" media="(min-width: 761px)">
 <link rel="preload" as="image" href="assets/img/hero-fish-m.webp" media="(max-width: 760px)">
-<link rel="stylesheet" href="styles.css?v=20261001-2">
+<link rel="stylesheet" href="styles.css?v=20261001-3">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Restaurant","name":"Sollmarine","description":"Ресторан морской кухни и стейк-хаус","servesCuisine":["Рыба и морепродукты","Стейки","Европейская кухня"],"address":{"@type":"PostalAddress","streetAddress":"5А микрорайон, 4, ЖК Twin Towers","addressLocality":"Актау","addressCountry":"KZ"},"geo":{"@type":"GeoCoordinates","latitude":43.639817,"longitude":51.154989},"sameAs":["https://www.instagram.com/sollmarine_aktau/","https://2gis.kz/aktau/geo/70000001101402112"],"telephone":"+77081806825","openingHours":"Mo-Su 12:00-24:00","paymentAccepted":"Cash, Credit Card, QR","url":"https://sollmarine.kz/","image":"https://sollmarine.kz/assets/og-image.jpg","acceptsReservations":"True","hasMenu":"https://sollmarine.kz/#menu"}
 </script>
@@ -459,6 +483,6 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="script.js?v=20261001-2"></script>
+<script src="script.js?v=20261001-3"></script>
 </body>
 </html>
